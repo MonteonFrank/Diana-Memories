@@ -1,0 +1,72 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #81BFDA;
+}
+
+/* Photo Album Container */
+.photo-album {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  max-width: 1200px;
+  margin: auto; /* Centers the container horizontally */
+  background-color: #F5F0CD ;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  justify-content: center; /* Centers grid items horizontally */
+  align-items: center; /* Centers grid items vertically */
+}
+
+/* Images in the Grid */
+.photo-album img {
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* Ensures the image fits neatly within its grid cell */
+  border-radius: 8px; /* Optional rounded corners */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Image Hover Effect */
+.photo-album img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Lightbox Modal */
+.lightbox {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  z-index: 1000;
+  align-items: center; /* Vertically centers the content */
+  justify-content: center; /* Horizontally centers the content */
+}
+
+/* Enlarged Image in the Lightbox */
+.lightbox img {
+  max-width: 90%; /* Prevents the image from being too large */
+  max-height: 90%; /* Keeps the image within the viewport */
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2); /* Soft white glow */
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Lightbox Fade-In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
