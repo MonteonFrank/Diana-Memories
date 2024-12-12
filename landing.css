@@ -37,7 +37,22 @@ main {
   margin: auto;
 }
 
+.album-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping to new rows when the screen is smaller */
+  justify-content: center; /* Center horizontally */
+  gap: 20px; /* Space between sections */
+  margin: 0 auto; /* Center the container */
+  max-width: 1200px; /* Optional: restrict maximum width */
+  padding: 20px; /* Optional: add padding around the container */
+}
+
 .album-section {
+
+  flex: 1 1 calc(33.33% - 40px); /* Make sections take one-third of the container width, accounting for gap */
+  max-width: calc(33.33% - 40px); /* Prevent sections from growing too large */
+  min-width: 250px; /* Set a minimum width for smaller screens */
+  box-sizing: border-box; /* Include padding/borders in width */
   text-align: center;
   margin-bottom: 40px;
   padding: 20px;
@@ -83,4 +98,12 @@ main {
 .footer p {
   margin: 0;
   font-size: 0.9em;
+}
+
+
+@media (max-width: 768px) {
+  .album-section {
+    flex: 1 1 100%; /* Each section takes full width */
+    max-width: 100%;
+  }
 }
