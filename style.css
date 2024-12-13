@@ -5,8 +5,15 @@ body {
   background-color: #81BFDA;
 }
 
-.nav {
+.header {
+  text-align: center;
+  padding: 40px 20px;
   background-color: #B1F0F7;
+  color: black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.nav {
+  background-color: #81BFDA;
 }
 
 .nav-link {
