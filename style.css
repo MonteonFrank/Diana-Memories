@@ -52,24 +52,21 @@ body {
 
 
 .lightbox {
-  display: none; 
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); 
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
-  align-items: center; 
-  justify-content: center; 
 }
 
-.lightbox img {
-  max-width: 90%; 
-  max-height: 90%; 
-  border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2); 
-  animation: fadeIn 0.3s ease-in-out;
+#lightbox-img {
+  max-width: 90%;
+  max-height: 90%;
 }
 
 
