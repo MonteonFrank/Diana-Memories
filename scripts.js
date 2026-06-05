@@ -1,5 +1,6 @@
 let currentIndex = 0;
 let images = [];
+const preloadedImageUrls = new Set();
 
 document.addEventListener('DOMContentLoaded', () => {
   const photoAlbum = document.querySelector('.photo-album');
@@ -14,23 +15,25 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error('No images found in the gallery. Check your HTML structure.');
   }
 
-  // Register swipe listeners once at startup instead of on every lightbox open
   const lightbox = document.getElementById('lightbox');
-  injectDesktopHint(lightbox);
-  let startX = 0;
+  // Register swipe listeners once at startup instead of on every lightbox open.
+  if (lightbox) {
+    injectDesktopHint(lightbox);
+    let startX = 0;
 
-  lightbox.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-  });
+    lightbox.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
 
-  lightbox.addEventListener('touchend', (e) => {
-    const endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) {
-      showNextImage();
-    } else if (endX - startX > 50) {
-      showPrevImage();
-    }
-  });
+    lightbox.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) {
+        showNextImage();
+      } else if (endX - startX > 50) {
+        showPrevImage();
+      }
+    }, { passive: true });
+  }
 
   // Desktop keyboard navigation only while lightbox is open.
   document.addEventListener('keydown', (event) => {
@@ -95,7 +98,8 @@ function renderJsonGallery(photoAlbum, scriptId) {
     const image = document.createElement('img');
     image.src = item.thumb || item.src || item.full;
     image.alt = item.alt || `Gallery image ${index + 1}`;
-    image.loading = 'lazy';
+    image.loading = index < 4 ? 'eager' : 'lazy';
+    image.fetchPriority = index === 0 ? 'high' : 'auto';
     image.decoding = 'async';
     image.dataset.index = String(index);
     image.dataset.full = item.full || item.src || item.thumb;
@@ -109,7 +113,20 @@ function renderJsonGallery(photoAlbum, scriptId) {
     }
 
     image.addEventListener('click', () => enlargeImage(image));
-    photoAlbum.appendChild(image);
+    image.addEventListener('pointerenter', () => preloadImage(image.dataset.full));
+    image.addEventListener('touchstart', () => preloadImage(image.dataset.full), { passive: true, once: true });
+
+    if (item.thumbWebp) {
+      const picture = document.createElement('picture');
+      const webpSource = document.createElement('source');
+      webpSource.type = 'image/webp';
+      webpSource.srcset = item.thumbWebp;
+      picture.appendChild(webpSource);
+      picture.appendChild(image);
+      photoAlbum.appendChild(picture);
+    } else {
+      photoAlbum.appendChild(image);
+    }
   });
 }
 
@@ -131,6 +148,7 @@ function enlargeImage(imgElement) {
 
   lightboxImg.src = images[currentIndex].dataset.full || images[currentIndex].src;
   lightbox.style.display = 'flex';
+  preloadAdjacentImages();
 }
 
 function closeLightbox() {
@@ -153,4 +171,28 @@ function showPrevImage() {
 function updateLightboxImage() {
   const activeImage = images[currentIndex];
   document.getElementById('lightbox-img').src = activeImage.dataset.full || activeImage.src;
+  preloadAdjacentImages();
+}
+
+function preloadAdjacentImages() {
+  if (images.length < 2) {
+    return;
+  }
+
+  const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+  const prevIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+
+  preloadImage(images[nextIndex].dataset.full || images[nextIndex].src);
+  preloadImage(images[prevIndex].dataset.full || images[prevIndex].src);
+}
+
+function preloadImage(url) {
+  if (!url || preloadedImageUrls.has(url)) {
+    return;
+  }
+
+  const preloadedImage = new Image();
+  preloadedImage.decoding = 'async';
+  preloadedImage.src = url;
+  preloadedImageUrls.add(url);
 }
