@@ -2,6 +2,12 @@ let currentIndex = 0;
 let images = [];
 
 document.addEventListener('DOMContentLoaded', () => {
+  const photoAlbum = document.querySelector('.photo-album');
+
+  if (photoAlbum && photoAlbum.dataset.galleryJson) {
+    renderJsonGallery(photoAlbum, photoAlbum.dataset.galleryJson);
+  }
+
   images = Array.from(document.querySelectorAll('.photo-album img'));
 
   if (images.length === 0) {
@@ -10,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Register swipe listeners once at startup instead of on every lightbox open
   const lightbox = document.getElementById('lightbox');
+  injectDesktopHint(lightbox);
   let startX = 0;
 
   lightbox.addEventListener('touchstart', (e) => {
@@ -24,7 +31,87 @@ document.addEventListener('DOMContentLoaded', () => {
       showPrevImage();
     }
   });
+
+  // Desktop keyboard navigation only while lightbox is open.
+  document.addEventListener('keydown', (event) => {
+    if (!isLightboxOpen()) {
+      return;
+    }
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      showNextImage();
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      showPrevImage();
+    } else if (event.key === 'Escape') {
+      closeLightbox();
+    }
+  });
 });
+
+function isLightboxOpen() {
+  const lightbox = document.getElementById('lightbox');
+  return Boolean(lightbox && getComputedStyle(lightbox).display !== 'none');
+}
+
+function injectDesktopHint(lightbox) {
+  if (!lightbox || lightbox.querySelector('.lightbox-hint')) {
+    return;
+  }
+
+  const hint = document.createElement('p');
+  hint.className = 'lightbox-hint';
+  hint.textContent = 'Use Left and Right arrows to navigate. Press Esc to close.';
+  lightbox.appendChild(hint);
+}
+
+function renderJsonGallery(photoAlbum, scriptId) {
+  const dataElement = document.getElementById(scriptId);
+
+  if (!dataElement) {
+    console.error(`Gallery JSON element not found: ${scriptId}`);
+    return;
+  }
+
+  let galleryItems;
+
+  try {
+    const parsedData = JSON.parse(dataElement.textContent);
+    galleryItems = Array.isArray(parsedData) ? parsedData : parsedData.images;
+  } catch (error) {
+    console.error('Failed to parse gallery JSON.', error);
+    return;
+  }
+
+  if (!Array.isArray(galleryItems) || galleryItems.length === 0) {
+    console.error('Gallery JSON does not contain any images.');
+    return;
+  }
+
+  photoAlbum.innerHTML = '';
+
+  galleryItems.forEach((item, index) => {
+    const image = document.createElement('img');
+    image.src = item.thumb || item.src || item.full;
+    image.alt = item.alt || `Gallery image ${index + 1}`;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    image.dataset.index = String(index);
+    image.dataset.full = item.full || item.src || item.thumb;
+
+    if (item.width) {
+      image.width = item.width;
+    }
+
+    if (item.height) {
+      image.height = item.height;
+    }
+
+    image.addEventListener('click', () => enlargeImage(image));
+    photoAlbum.appendChild(image);
+  });
+}
 
 function enlargeImage(imgElement) {
   const lightbox = document.getElementById('lightbox');
@@ -42,7 +129,7 @@ function enlargeImage(imgElement) {
     return;
   }
 
-  lightboxImg.src = images[currentIndex].src;
+  lightboxImg.src = images[currentIndex].dataset.full || images[currentIndex].src;
   lightbox.style.display = 'flex';
 }
 
@@ -64,5 +151,6 @@ function showPrevImage() {
 }
 
 function updateLightboxImage() {
-  document.getElementById('lightbox-img').src = images[currentIndex].src;
+  const activeImage = images[currentIndex];
+  document.getElementById('lightbox-img').src = activeImage.dataset.full || activeImage.src;
 }

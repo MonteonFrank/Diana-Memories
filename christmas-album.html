@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Christmas Photo Album 2023</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -13,7 +12,9 @@
 <body>
 
   <header class="header">
-    <h1>Welcome Diana's Photo Album</h1>
+    <p class="header-kicker">Holiday Memories</p>
+    <h1>Christmas 2023</h1>
+    <p class="header-subtitle">Diana's first Christmas, captured in warm lights, family moments, and the feeling of a new tradition starting.</p>
   </header>
 
   <div>
@@ -42,28 +43,34 @@
     </ul>
   </div>
 
-  <div class="photo-album">
-    <img src="./1st Christmas Diana/ChristmasPic1.jpg" alt="Christmas Photo 1" data-index="0" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic2.jpg" alt="Christmas Photo 2" data-index="1" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic3.jpg" alt="Christmas Photo 3" data-index="2" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic4.jpg" alt="Christmas Photo 4" data-index="3" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic5.jpg" alt="Christmas Photo 5" data-index="4" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic6.jpg" alt="Christmas Photo 6" data-index="5" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic7.jpg" alt="Christmas Photo 7" data-index="6" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic8.jpg" alt="Christmas Photo 8" data-index="7" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic9.jpg" alt="Christmas Photo 9" data-index="8" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic10.jpg" alt="Christmas Photo 10" data-index="9" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic11.jpg" alt="Christmas Photo 11" data-index="10" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic12.jpg" alt="Christmas Photo 12" data-index="11" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic13.jpg" alt="Christmas Photo 13" data-index="12" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic14.jpg" alt="Christmas Photo 14" data-index="13" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./1st Christmas Diana/ChristmasPic15.jpg" alt="Christmas Photo 15" data-index="14" loading="lazy" onclick="enlargeImage(this)">
-  </div>
+  <div class="photo-album" data-gallery-json="christmas2023-gallery-data"></div>
 
 
   <div id="lightbox" class="lightbox" style="display: none;" onclick="closeLightbox()">
     <img id="lightbox-img" alt="Enlarged Image">
   </div>
+
+  <script id="christmas2023-gallery-data" type="application/json">
+    {
+      "images": [
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic1.jpg", "full": "./1st Christmas Diana/ChristmasPic1.jpg", "alt": "Christmas Photo 1" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic2.jpg", "full": "./1st Christmas Diana/ChristmasPic2.jpg", "alt": "Christmas Photo 2" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic3.jpg", "full": "./1st Christmas Diana/ChristmasPic3.jpg", "alt": "Christmas Photo 3" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic4.jpg", "full": "./1st Christmas Diana/ChristmasPic4.jpg", "alt": "Christmas Photo 4" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic5.jpg", "full": "./1st Christmas Diana/ChristmasPic5.jpg", "alt": "Christmas Photo 5" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic6.jpg", "full": "./1st Christmas Diana/ChristmasPic6.jpg", "alt": "Christmas Photo 6" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic7.jpg", "full": "./1st Christmas Diana/ChristmasPic7.jpg", "alt": "Christmas Photo 7" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic8.jpg", "full": "./1st Christmas Diana/ChristmasPic8.jpg", "alt": "Christmas Photo 8" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic9.jpg", "full": "./1st Christmas Diana/ChristmasPic9.jpg", "alt": "Christmas Photo 9" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic10.jpg", "full": "./1st Christmas Diana/ChristmasPic10.jpg", "alt": "Christmas Photo 10" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic11.jpg", "full": "./1st Christmas Diana/ChristmasPic11.jpg", "alt": "Christmas Photo 11" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic12.jpg", "full": "./1st Christmas Diana/ChristmasPic12.jpg", "alt": "Christmas Photo 12" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic13.jpg", "full": "./1st Christmas Diana/ChristmasPic13.jpg", "alt": "Christmas Photo 13" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic14.jpg", "full": "./1st Christmas Diana/ChristmasPic14.jpg", "alt": "Christmas Photo 14" },
+        { "thumb": "./1st Christmas Diana/thumbs/ChristmasPic15.jpg", "full": "./1st Christmas Diana/ChristmasPic15.jpg", "alt": "Christmas Photo 15" }
+      ]
+    }
+  </script>
 
   <script src="./scripts.js"></script>
 </body>

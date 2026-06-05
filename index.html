@@ -5,72 +5,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diana's Photo Album</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="./landing.css">
 </head>
 
 <body>
-  <header class="header bg-primary text-white text-center py-3">
-    <h1>Welcome to Diana's Photo Album</h1>
+  <header class="header">
+    <p class="header-eyebrow">Diana Memories</p>
+    <h1>Moments Worth Keeping Close</h1>
+    <p class="header-copy">A warm little archive of Diana's milestones, holidays, and family moments, gathered into one place with a softer, more timeless feel.</p>
   </header>
 
   <main>
     <div class="album-container">
       <div class="album-section">
-        <img src="./New Born Diana Pictures/NewBorn1.jpg" class="card-img-top" alt="New Born Pics">
+        <img src="./New Born Diana Pictures/NewBorn1.jpg" alt="New Born Pics">
         <h5 class="card-title">New Born Pics</h5>
         <p class="card-text">When Diana was only 14 days old</p>
         <a href="new-born.html" class="btn">View Pics</a>
       </div>
       <div class="album-section">
-        <img src="./1st Birthday/BirthdayPic1.jpg" class="card-img-top" alt="1st Birthday">
+        <img src="./1st Birthday/BirthdayPic1.jpg" alt="1st Birthday">
         <h5 class="card-title">1st Birthday</h5>
         <p class="card-text">Diana's 1st Birthday</p>
         <a href="birthday.html" class="btn">View Pics</a>
       </div>
       <div class="album-section">
-        <img src="./Month by Month/Month1.jpg" class="card-img-top" alt="Month by Month">
+        <img src="./Month by Month/Month1.jpg" alt="Month by Month">
         <h5 class="card-title">Month by Month</h5>
         <p class="card-text">See how Diana grew month by month</p>
         <a href="monthbymonth.html" class="btn">View Pics</a>
       </div>
       <div class="album-section">
-        <img src="./SessionCousins/Xmass-1.jpg" class="card-img-top" alt="Christmas Photos with Cousins">
+        <img src="./SessionCousins/Xmass-1.jpg" alt="Christmas Photos with Cousins">
         <h5 class="card-title">Christmas Photos with Cousins</h5>
         <p class="card-text">Photosoot with my cousins</p>
         <a href="sessioncousins.html" class="btn">View Pics</a>
       </div>
       <div class="album-section">
-        <img src="./1st Christmas Diana/ChristmasPic1.jpg" class="card-img-top" alt="Christmas 2023">
+        <img src="./1st Christmas Diana/ChristmasPic1.jpg" alt="Christmas 2023">
         <h5 class="card-title">Christmas 2023</h5>
         <p class="card-text">Diana's first Christmas</p>
         <a href="christmas-album.html" class="btn">View Pics</a>
       </div>
       <div class="album-section">
-        <img src="./Christmas Photos 2024/ChristmasPic1.jpg" class="card-img-top" alt="Christmas 2024">
+        <img src="./Christmas Photos 2024/ChristmasPic1.jpg" alt="Christmas 2024">
         <h5 class="card-title">Christmas 2024</h5>
         <p class="card-text">Diana's second Christmas</p>
         <a href="christmas2-album.html" class="btn">View Pics</a>
       </div>
       <div class="album-section">
-        <img src="./Baptism/BAUTIZO-1.jpg" class="card-img-top" alt="Diana's Baptism">
+        <img src="./Baptism/BAUTIZO-1.jpg" alt="Diana's Baptism">
         <h5 class="card-title">Diana's Baptism</h5>
         <p class="card-text">Diana's baptism photos</p>
         <a href="baptism.html" class="btn">View Pics</a>
       </div>
     </div>
   </main>
-
-  <div id="lightbox" class="lightbox d-none" onclick="closeLightbox()">
-    <img id="lightbox-img" alt="Enlarged Image">
-  </div>
-
-  <script>
-    function closeLightbox() {
-      const lightbox = document.getElementById('lightbox');
-      lightbox.classList.add('d-none');
-    }
-  </script>
 </body>
 
 </html>

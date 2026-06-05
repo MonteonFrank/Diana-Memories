@@ -5,14 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Christmas Photo Album 2024</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
   <header class="header">
-    <h1>Welcome Diana's Photo Album</h1>
+    <p class="header-kicker">Holiday Memories</p>
+    <h1>Christmas 2024</h1>
+    <p class="header-subtitle">A second Christmas with Diana, fuller and brighter, with more family memories woven into the season.</p>
   </header>
 
   <div>
@@ -41,42 +42,48 @@
     </ul>
   </div>
   
-  <div class="photo-album">
-    <img src="./Christmas Photos 2024/ChristmasPic1.jpg" alt="Christmas Photo 1" data-index="0" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic2.jpg" alt="Christmas Photo 2" data-index="1" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic3.jpg" alt="Christmas Photo 3" data-index="2" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic4.jpg" alt="Christmas Photo 4" data-index="3" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic5.jpg" alt="Christmas Photo 5" data-index="4" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic6.jpg" alt="Christmas Photo 6"  data-index="5" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic7.jpg" alt="Christmas Photo 7"  data-index="6" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic8.jpg" alt="Christmas Photo 8"  data-index="7" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic9.jpg" alt="Christmas Photo 9"  data-index="8" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic10.jpg" alt="Christmas Photo 10"  data-index="9" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic11.jpg" alt="Christmas Photo 11"  data-index="10" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic12.jpg" alt="Christmas Photo 12"  data-index="11" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic13.jpg" alt="Christmas Photo 13"  data-index="12" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic14.jpg" alt="Christmas Photo 14"  data-index="13" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic15.jpg" alt="Christmas Photo 15"  data-index="14" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic16.jpg" alt="Christmas Photo 16"  data-index="15" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic17.jpg" alt="Christmas Photo 17"  data-index="16" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic18.jpg" alt="Christmas Photo 18"  data-index="17" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic19.jpg" alt="Christmas Photo 19"  data-index="18" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic20.jpg" alt="Christmas Photo 20"  data-index="19" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic21.jpg" alt="Christmas Photo 21"  data-index="20" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic22.jpg" alt="Christmas Photo 22"  data-index="21" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic23.jpg" alt="Christmas Photo 23"  data-index="22" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic24.jpg" alt="Christmas Photo 24"  data-index="23" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic25.jpg" alt="Christmas Photo 25"  data-index="24" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic26.jpg" alt="Christmas Photo 26"  data-index="25" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic27.jpg" alt="Christmas Photo 27"  data-index="26" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic28.jpg" alt="Christmas Photo 28"  data-index="27" loading="lazy" onclick="enlargeImage(this)">
-    <img src="./Christmas Photos 2024/ChristmasPic29.jpg" alt="Christmas Photo 29"  data-index="28" loading="lazy" onclick="enlargeImage(this)">
-  </div>
+  <div class="photo-album" data-gallery-json="christmas2024-gallery-data"></div>
 
   <!-- Modal/Lightbox -->
   <div id="lightbox" class="lightbox" style="display: none;" onclick="closeLightbox()">
     <img id="lightbox-img" alt="Enlarged Image">
   </div>
+
+  <script id="christmas2024-gallery-data" type="application/json">
+    {
+      "images": [
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic1.jpg", "full": "./Christmas Photos 2024/ChristmasPic1.jpg", "alt": "Christmas Photo 1" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic2.jpg", "full": "./Christmas Photos 2024/ChristmasPic2.jpg", "alt": "Christmas Photo 2" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic3.jpg", "full": "./Christmas Photos 2024/ChristmasPic3.jpg", "alt": "Christmas Photo 3" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic4.jpg", "full": "./Christmas Photos 2024/ChristmasPic4.jpg", "alt": "Christmas Photo 4" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic5.jpg", "full": "./Christmas Photos 2024/ChristmasPic5.jpg", "alt": "Christmas Photo 5" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic6.jpg", "full": "./Christmas Photos 2024/ChristmasPic6.jpg", "alt": "Christmas Photo 6" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic7.jpg", "full": "./Christmas Photos 2024/ChristmasPic7.jpg", "alt": "Christmas Photo 7" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic8.jpg", "full": "./Christmas Photos 2024/ChristmasPic8.jpg", "alt": "Christmas Photo 8" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic9.jpg", "full": "./Christmas Photos 2024/ChristmasPic9.jpg", "alt": "Christmas Photo 9" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic10.jpg", "full": "./Christmas Photos 2024/ChristmasPic10.jpg", "alt": "Christmas Photo 10" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic11.jpg", "full": "./Christmas Photos 2024/ChristmasPic11.jpg", "alt": "Christmas Photo 11" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic12.jpg", "full": "./Christmas Photos 2024/ChristmasPic12.jpg", "alt": "Christmas Photo 12" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic13.jpg", "full": "./Christmas Photos 2024/ChristmasPic13.jpg", "alt": "Christmas Photo 13" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic14.jpg", "full": "./Christmas Photos 2024/ChristmasPic14.jpg", "alt": "Christmas Photo 14" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic15.jpg", "full": "./Christmas Photos 2024/ChristmasPic15.jpg", "alt": "Christmas Photo 15" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic16.jpg", "full": "./Christmas Photos 2024/ChristmasPic16.jpg", "alt": "Christmas Photo 16" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic17.jpg", "full": "./Christmas Photos 2024/ChristmasPic17.jpg", "alt": "Christmas Photo 17" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic18.jpg", "full": "./Christmas Photos 2024/ChristmasPic18.jpg", "alt": "Christmas Photo 18" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic19.jpg", "full": "./Christmas Photos 2024/ChristmasPic19.jpg", "alt": "Christmas Photo 19" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic20.jpg", "full": "./Christmas Photos 2024/ChristmasPic20.jpg", "alt": "Christmas Photo 20" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic21.jpg", "full": "./Christmas Photos 2024/ChristmasPic21.jpg", "alt": "Christmas Photo 21" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic22.jpg", "full": "./Christmas Photos 2024/ChristmasPic22.jpg", "alt": "Christmas Photo 22" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic23.jpg", "full": "./Christmas Photos 2024/ChristmasPic23.jpg", "alt": "Christmas Photo 23" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic24.jpg", "full": "./Christmas Photos 2024/ChristmasPic24.jpg", "alt": "Christmas Photo 24" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic25.jpg", "full": "./Christmas Photos 2024/ChristmasPic25.jpg", "alt": "Christmas Photo 25" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic26.jpg", "full": "./Christmas Photos 2024/ChristmasPic26.jpg", "alt": "Christmas Photo 26" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic27.jpg", "full": "./Christmas Photos 2024/ChristmasPic27.jpg", "alt": "Christmas Photo 27" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic28.jpg", "full": "./Christmas Photos 2024/ChristmasPic28.jpg", "alt": "Christmas Photo 28" },
+        { "thumb": "./Christmas Photos 2024/thumbs/ChristmasPic29.jpg", "full": "./Christmas Photos 2024/ChristmasPic29.jpg", "alt": "Christmas Photo 29" }
+      ]
+    }
+  </script>
 
   <script src="./scripts.js"></script>
 </body>

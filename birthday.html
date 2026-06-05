@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Birthday</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
   </head>
 
 <body>
 
   <header class="header">
-    <h1>Welcome Diana's Photo Album</h1>
+    <p class="header-kicker">Milestone</p>
+    <h1>1st Birthday</h1>
+    <p class="header-subtitle">A joyful look back at Diana's first birthday celebration, full of color, cake, and family.</p>
   </header>
 
     <div>
@@ -41,37 +42,43 @@
       </ul>
     </div>
 
-    <div class="photo-album">
-      <img src="./1st Birthday/BirthdayPic1.jpg" alt="Birthday Pic 1" data-index="0" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic2.jpg" alt="Birthday Pic 2" data-index="1" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic3.jpg" alt="Birthday Pic 3" data-index="2" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic4.jpg" alt="Birthday Pic 4" data-index="3" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic5.jpg" alt="Birthday Pic 5" data-index="4" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic6.jpg" alt="Birthday Pic 6" data-index="5" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic7.jpg" alt="Birthday Pic 7" data-index="6" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic8.jpg" alt="Birthday Pic 8" data-index="7" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic9.jpg" alt="Birthday Pic 9" data-index="8" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic10.jpg" alt="Birthday Pic 10" data-index="9" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic11.jpg" alt="Birthday Pic 11" data-index="10" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic12.jpg" alt="Birthday Pic 12" data-index="11" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic13.jpg" alt="Birthday Pic 13" data-index="12" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic14.jpg" alt="Birthday Pic 14" data-index="13" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic15.jpg" alt="Birthday Pic 15" data-index="14" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic16.jpg" alt="Birthday Pic 16" data-index="15" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic17.jpg" alt="Birthday Pic 17" data-index="16" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic18.jpg" alt="Birthday Pic 18" data-index="17" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic19.jpg" alt="Birthday Pic 19" data-index="18" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic20.jpg" alt="Birthday Pic 20" data-index="19" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic21.jpg" alt="Birthday Pic 21" data-index="20" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic22.jpg" alt="Birthday Pic 22" data-index="21" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic23.jpg" alt="Birthday Pic 23" data-index="22" loading="lazy" onclick="enlargeImage(this)">
-      <img src="./1st Birthday/BirthdayPic24.jpg" alt="Birthday Pic 24" data-index="23" loading="lazy" onclick="enlargeImage(this)">
-    </div>
+    <div class="photo-album" data-gallery-json="birthday-gallery-data"></div>
 
   <!-- Modal/Lightbox -->
   <div id="lightbox" class="lightbox" style="display: none;" onclick="closeLightbox()">
     <img id="lightbox-img" alt="Enlarged Image">
   </div>
+
+  <script id="birthday-gallery-data" type="application/json">
+    {
+      "images": [
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic1.jpg", "full": "./1st Birthday/BirthdayPic1.jpg", "alt": "Birthday Pic 1" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic2.jpg", "full": "./1st Birthday/BirthdayPic2.jpg", "alt": "Birthday Pic 2" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic3.jpg", "full": "./1st Birthday/BirthdayPic3.jpg", "alt": "Birthday Pic 3" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic4.jpg", "full": "./1st Birthday/BirthdayPic4.jpg", "alt": "Birthday Pic 4" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic5.jpg", "full": "./1st Birthday/BirthdayPic5.jpg", "alt": "Birthday Pic 5" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic6.jpg", "full": "./1st Birthday/BirthdayPic6.jpg", "alt": "Birthday Pic 6" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic7.jpg", "full": "./1st Birthday/BirthdayPic7.jpg", "alt": "Birthday Pic 7" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic8.jpg", "full": "./1st Birthday/BirthdayPic8.jpg", "alt": "Birthday Pic 8" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic9.jpg", "full": "./1st Birthday/BirthdayPic9.jpg", "alt": "Birthday Pic 9" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic10.jpg", "full": "./1st Birthday/BirthdayPic10.jpg", "alt": "Birthday Pic 10" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic11.jpg", "full": "./1st Birthday/BirthdayPic11.jpg", "alt": "Birthday Pic 11" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic12.jpg", "full": "./1st Birthday/BirthdayPic12.jpg", "alt": "Birthday Pic 12" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic13.jpg", "full": "./1st Birthday/BirthdayPic13.jpg", "alt": "Birthday Pic 13" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic14.jpg", "full": "./1st Birthday/BirthdayPic14.jpg", "alt": "Birthday Pic 14" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic15.jpg", "full": "./1st Birthday/BirthdayPic15.jpg", "alt": "Birthday Pic 15" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic16.jpg", "full": "./1st Birthday/BirthdayPic16.jpg", "alt": "Birthday Pic 16" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic17.jpg", "full": "./1st Birthday/BirthdayPic17.jpg", "alt": "Birthday Pic 17" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic18.jpg", "full": "./1st Birthday/BirthdayPic18.jpg", "alt": "Birthday Pic 18" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic19.jpg", "full": "./1st Birthday/BirthdayPic19.jpg", "alt": "Birthday Pic 19" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic20.jpg", "full": "./1st Birthday/BirthdayPic20.jpg", "alt": "Birthday Pic 20" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic21.jpg", "full": "./1st Birthday/BirthdayPic21.jpg", "alt": "Birthday Pic 21" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic22.jpg", "full": "./1st Birthday/BirthdayPic22.jpg", "alt": "Birthday Pic 22" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic23.jpg", "full": "./1st Birthday/BirthdayPic23.jpg", "alt": "Birthday Pic 23" },
+        { "thumb": "./1st Birthday/thumbs/BirthdayPic24.jpg", "full": "./1st Birthday/BirthdayPic24.jpg", "alt": "Birthday Pic 24" }
+      ]
+    }
+  </script>
 
   <script src="./scripts.js"></script>
 </body>

@@ -1,72 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #f8f4ee;
+  --surface: rgba(255, 253, 249, 0.9);
+  --surface-muted: #f2e9dd;
+  --text: #2e2a27;
+  --muted: #746b64;
+  --accent: #d9896a;
+  --accent-deep: #b96c4f;
+  --sage: #a8c6b0;
+  --highlight: #f1d39a;
+  --shadow: 0 22px 50px rgba(72, 50, 37, 0.12);
+  --shadow-soft: 0 14px 28px rgba(72, 50, 37, 0.08);
+  --radius-xl: 30px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #81BFDA;
+  padding: 0 0 40px;
+  font-family: 'Manrope', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(241, 211, 154, 0.3), transparent 28%),
+    radial-gradient(circle at 85% 0%, rgba(168, 198, 176, 0.28), transparent 24%),
+    linear-gradient(180deg, #fbf8f2 0%, var(--bg) 100%);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .header {
+  width: min(1100px, calc(100% - 32px));
+  margin: 28px auto 16px;
+  padding: 38px 20px;
   text-align: center;
-  padding: 40px 20px;
-  background-color: #B1F0F7;
-  color: black;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: var(--text);
+  background: linear-gradient(135deg, rgba(255, 253, 249, 0.95), rgba(242, 233, 221, 0.92));
+  border: 1px solid rgba(185, 108, 79, 0.1);
+  border-radius: calc(var(--radius-xl) + 4px);
+  box-shadow: var(--shadow);
+  animation: fade-up 0.65s ease-out both;
 }
+
+.header-kicker {
+  margin: 0 0 10px;
+  color: var(--accent-deep);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.header-subtitle {
+  max-width: 620px;
+  margin: 12px auto 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.header h1 {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 4.8vw, 4.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
 .nav {
-  background-color: #FADA7A;
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto 24px;
+  padding: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid rgba(185, 108, 79, 0.08);
+  border-radius: 999px;
+  box-shadow: var(--shadow-soft);
+  animation: fade-up 0.72s ease-out both;
 }
 
 .nav-link {
-  color: black;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 999px;
+  transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
 }
 
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  transform: translateY(-1px);
+}
 
 .photo-album {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 22px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  padding: 16px;
-  max-width: 1200px;
-  margin: auto; 
-  background-color: #F5F0CD ;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  justify-content: center; 
-  align-items: center; 
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 18px;
+  background: var(--surface);
+  border: 1px solid rgba(185, 108, 79, 0.08);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
 }
-
 
 .photo-album img {
   width: 100%;
   height: auto;
-  object-fit: contain;
-  border-radius: 8px; 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+  background: var(--surface-muted);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 22px rgba(72, 50, 37, 0.08);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, filter 0.28s ease;
+  cursor: pointer;
+  opacity: 0;
+  animation: fade-up 0.5s ease-out both;
 }
 
+.photo-album img:nth-child(6n + 1) {
+  animation-delay: 0.08s;
+}
+
+.photo-album img:nth-child(6n + 2) {
+  animation-delay: 0.14s;
+}
+
+.photo-album img:nth-child(6n + 3) {
+  animation-delay: 0.2s;
+}
+
+.photo-album img:nth-child(6n + 4) {
+  animation-delay: 0.26s;
+}
+
+.photo-album img:nth-child(6n + 5) {
+  animation-delay: 0.32s;
+}
+
+.photo-album img:nth-child(6n) {
+  animation-delay: 0.38s;
+}
 
 .photo-album img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 34px rgba(72, 50, 37, 0.14);
+  filter: saturate(1.03);
 }
-
 
 .lightbox {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  inset: 0;
+  background: rgba(34, 26, 21, 0.82);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 24px;
   z-index: 1000;
 }
 
+.lightbox-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 8px 14px;
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: rgba(34, 26, 21, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
 #lightbox-img {
-  max-width: 90%;
-  max-height: 90%;
+  max-width: min(1080px, 94vw);
+  max-height: 90vh;
+  border-radius: 18px;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.28);
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 24px;
+  }
+
+  .header,
+  .nav,
+  .photo-album {
+    width: min(100% - 20px, 1200px);
+  }
+
+  .header {
+    margin-top: 16px;
+    padding: 28px 16px;
+  }
+
+  .nav {
+    padding: 10px;
+    border-radius: 24px;
+  }
+
+  .photo-album {
+    padding: 16px;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .lightbox-hint {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .nav,
+  .photo-album img {
+    animation: none;
+    opacity: 1;
+  }
+
+  .nav-link,
+  .photo-album img {
+    transition: none;
+  }
 }
 
 
