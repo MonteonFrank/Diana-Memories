@@ -4,16 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Month by Month</title>
+  <title>Favorites</title>
   <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
   <header class="header">
-    <p class="header-kicker">Year One</p>
-    <h1>Month by Month</h1>
-    <p class="header-subtitle">A simple timeline of Diana growing through her first year, one month and one memory at a time.</p>
+    <p class="header-kicker">Your Picks</p>
+    <h1>Favorites</h1>
+    <p class="header-subtitle">Tap the heart icon on any album photo to save it here. Your selections are stored on this device.</p>
   </header>
 
   <div>
@@ -54,32 +54,19 @@
     </ul>
   </div>
 
-  <div class="photo-album" data-gallery-json="month-gallery-data"></div>
+  <div class="favorites-toolbar">
+    <button id="clear-favorites" class="favorites-clear" type="button">Clear Favorites</button>
+  </div>
 
-  <!-- Modal/Lightbox -->
+  <p id="favorites-empty" class="favorites-empty" hidden>No favorite photos yet. Open any album and tap the heart icon on pictures you love.</p>
+
+  <div id="favorites-album" class="photo-album"></div>
+
   <div id="lightbox" class="lightbox" style="display: none;" onclick="closeLightbox()">
     <img id="lightbox-img" alt="Enlarged Image">
   </div>
 
-  <script id="month-gallery-data" type="application/json">
-    {
-      "images": [
-        { "thumb": "./2024/Month by Month/thumbs/Month1.jpg", "full": "./2024/Month by Month/Month1.jpg", "alt": "Month 1" },
-        { "thumb": "./2024/Month by Month/thumbs/Month2.jpg", "full": "./2024/Month by Month/Month2.jpg", "alt": "Month 2" },
-        { "thumb": "./2024/Month by Month/thumbs/Month3.jpg", "full": "./2024/Month by Month/Month3.jpg", "alt": "Month 3" },
-        { "thumb": "./2024/Month by Month/thumbs/Month4(new).jpg", "full": "./2024/Month by Month/Month4(new).jpg", "alt": "Month 4" },
-        { "thumb": "./2024/Month by Month/thumbs/Month5.jpg", "full": "./2024/Month by Month/Month5.jpg", "alt": "Month 5" },
-        { "thumb": "./2024/Month by Month/thumbs/Month6.jpg", "full": "./2024/Month by Month/Month6.jpg", "alt": "Month 6" },
-        { "thumb": "./2024/Month by Month/thumbs/Month7(new).jpg", "full": "./2024/Month by Month/Month7(new).jpg", "alt": "Month 7" },
-        { "thumb": "./2024/Month by Month/thumbs/Month8.jpg", "full": "./2024/Month by Month/Month8.jpg", "alt": "Month 8" },
-        { "thumb": "./2024/Month by Month/thumbs/Month9(new).jpg", "full": "./2024/Month by Month/Month9(new).jpg", "alt": "Month 9" },
-        { "thumb": "./2024/Month by Month/thumbs/Month10.jpg", "full": "./2024/Month by Month/Month10.jpg", "alt": "Month 10" },
-        { "thumb": "./2024/Month by Month/thumbs/Month11(new).jpg", "full": "./2024/Month by Month/Month11(new).jpg", "alt": "Month 11" },
-        { "thumb": "./2024/Month by Month/thumbs/Month12.jpg", "full": "./2024/Month by Month/Month12.jpg", "alt": "Month 12" }
-      ]
-    }
-  </script>
-
   <script src="./scripts.js"></script>
 </body>
+
 </html>

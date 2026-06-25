@@ -183,6 +183,10 @@ body {
   contain-intrinsic-size: 1px 1200px;
 }
 
+.gallery-card {
+  position: relative;
+}
+
 .photo-album img {
   width: 100%;
   height: auto;
@@ -194,6 +198,65 @@ body {
   cursor: pointer;
   opacity: 0;
   animation: fade-up 0.5s ease-out both;
+}
+
+.favorite-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(185, 108, 79, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 253, 249, 0.92);
+  color: var(--accent-deep);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(72, 50, 37, 0.16);
+}
+
+.favorite-toggle.is-active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  border-color: transparent;
+}
+
+.favorites-toolbar {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.favorites-clear {
+  padding: 9px 14px;
+  border: 1px solid rgba(185, 108, 79, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 253, 249, 0.92);
+  color: var(--accent-deep);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.favorites-clear:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.favorites-empty {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto 14px;
+  padding: 14px 16px;
+  text-align: center;
+  color: var(--muted);
+  background: rgba(255, 253, 249, 0.84);
+  border: 1px dashed rgba(185, 108, 79, 0.24);
+  border-radius: 14px;
 }
 
 .photo-album img:nth-child(6n + 1) {
@@ -272,6 +335,11 @@ body {
     width: min(100% - 20px, 1200px);
   }
 
+  .favorites-toolbar,
+  .favorites-empty {
+    width: min(100% - 20px, 1200px);
+  }
+
   .header {
     margin-top: 16px;
     padding: 28px 16px;
@@ -338,10 +406,37 @@ body {
 
   .nav-year-link {
     justify-content: flex-start;
+    color: var(--text);
     border-radius: 10px;
     background: rgba(255, 253, 249, 0.75);
     border: 1px solid rgba(185, 108, 79, 0.12);
     padding: 10px 12px;
+  }
+
+  /* On mobile, submenu visibility is controlled only by .is-open state. */
+  .nav-item-year:hover .nav-year-menu,
+  .nav-item-year:focus-within .nav-year-menu {
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    padding: 0;
+    transform: none;
+  }
+
+  .nav-item-year.is-open:hover .nav-year-menu,
+  .nav-item-year.is-open:focus-within .nav-year-menu {
+    opacity: 1;
+    visibility: visible;
+    max-height: 480px;
+    padding: 6px 0 0;
+    transform: none;
+  }
+
+  .nav-year-link:hover,
+  .nav-year-link:focus-visible {
+    color: var(--text);
+    background: rgba(241, 211, 154, 0.45);
+    transform: none;
   }
 
   .photo-album {
@@ -352,6 +447,11 @@ body {
 
   .lightbox-hint {
     display: none;
+  }
+
+  .favorite-toggle {
+    width: 36px;
+    height: 36px;
   }
 }
 

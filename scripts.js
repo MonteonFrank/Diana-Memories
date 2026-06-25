@@ -1,18 +1,33 @@
 let currentIndex = 0;
 let images = [];
 const preloadedImageUrls = new Set();
+const FAVORITES_STORAGE_KEY = 'dianaMemoriesFavoritesV1';
 
 document.addEventListener('DOMContentLoaded', () => {
   const photoAlbum = document.querySelector('.photo-album');
+  const favoritesAlbum = document.getElementById('favorites-album');
+  const clearFavoritesButton = document.getElementById('clear-favorites');
   setupMobileYearMenus();
 
-  if (photoAlbum && photoAlbum.dataset.galleryJson) {
+  if (favoritesAlbum) {
+    renderFavoritesGallery(favoritesAlbum);
+  } else if (photoAlbum && photoAlbum.dataset.galleryJson) {
     renderJsonGallery(photoAlbum, photoAlbum.dataset.galleryJson);
+  }
+
+  if (clearFavoritesButton) {
+    clearFavoritesButton.addEventListener('click', () => {
+      clearFavorites();
+      if (favoritesAlbum) {
+        renderFavoritesGallery(favoritesAlbum);
+        images = Array.from(document.querySelectorAll('.photo-album img'));
+      }
+    });
   }
 
   images = Array.from(document.querySelectorAll('.photo-album img'));
 
-  if (images.length === 0) {
+  if (images.length === 0 && (photoAlbum || favoritesAlbum)) {
     console.error('No images found in the gallery. Check your HTML structure.');
   }
 
@@ -170,13 +185,15 @@ function renderJsonGallery(photoAlbum, scriptId) {
 
   galleryItems.forEach((item, index) => {
     const image = document.createElement('img');
+    const fullUrl = item.full || item.src || item.thumb;
+    const thumbUrl = item.thumb || item.src || item.full;
     image.src = item.thumb || item.src || item.full;
     image.alt = item.alt || `Gallery image ${index + 1}`;
     image.loading = index < 4 ? 'eager' : 'lazy';
     image.fetchPriority = index === 0 ? 'high' : 'auto';
     image.decoding = 'async';
     image.dataset.index = String(index);
-    image.dataset.full = item.full || item.src || item.thumb;
+    image.dataset.full = fullUrl;
 
     if (item.width) {
       image.width = item.width;
@@ -190,6 +207,16 @@ function renderJsonGallery(photoAlbum, scriptId) {
     image.addEventListener('pointerenter', () => preloadImage(image.dataset.full));
     image.addEventListener('touchstart', () => preloadImage(image.dataset.full), { passive: true, once: true });
 
+    const favoriteEntry = buildFavoriteEntry({
+      full: fullUrl,
+      thumb: thumbUrl,
+      alt: image.alt,
+    });
+
+    const mediaWrapper = document.createElement('div');
+    mediaWrapper.className = 'gallery-card';
+    mediaWrapper.appendChild(buildFavoriteButton(favoriteEntry));
+
     if (item.thumbWebp) {
       const picture = document.createElement('picture');
       const webpSource = document.createElement('source');
@@ -197,11 +224,166 @@ function renderJsonGallery(photoAlbum, scriptId) {
       webpSource.srcset = item.thumbWebp;
       picture.appendChild(webpSource);
       picture.appendChild(image);
-      photoAlbum.appendChild(picture);
+      mediaWrapper.appendChild(picture);
     } else {
-      photoAlbum.appendChild(image);
+      mediaWrapper.appendChild(image);
     }
+
+    photoAlbum.appendChild(mediaWrapper);
   });
+}
+
+function buildFavoriteButton(entry) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'favorite-toggle';
+  button.title = 'Add to favorites';
+  button.innerHTML = '&#9825;';
+
+  const syncState = () => {
+    const active = isFavorite(entry.id);
+    button.classList.toggle('is-active', active);
+    button.innerHTML = active ? '&#9829;' : '&#9825;';
+    button.title = active ? 'Remove from favorites' : 'Add to favorites';
+    button.setAttribute('aria-pressed', active ? 'true' : 'false');
+  };
+
+  syncState();
+
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    toggleFavorite(entry);
+    syncState();
+  });
+
+  return button;
+}
+
+function renderFavoritesGallery(container) {
+  const favorites = getFavorites();
+  const emptyState = document.getElementById('favorites-empty');
+  const clearButton = document.getElementById('clear-favorites');
+
+  container.innerHTML = '';
+
+  if (favorites.length === 0) {
+    if (emptyState) {
+      emptyState.hidden = false;
+    }
+    if (clearButton) {
+      clearButton.disabled = true;
+    }
+    return;
+  }
+
+  if (emptyState) {
+    emptyState.hidden = true;
+  }
+  if (clearButton) {
+    clearButton.disabled = false;
+  }
+
+  favorites.forEach((favorite, index) => {
+    const card = document.createElement('div');
+    card.className = 'gallery-card';
+
+    const image = document.createElement('img');
+    image.src = favorite.thumb || favorite.full;
+    image.alt = favorite.alt || `Favorite image ${index + 1}`;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    image.dataset.index = String(index);
+    image.dataset.full = favorite.full;
+    image.addEventListener('click', () => enlargeImage(image));
+
+    const removeButton = document.createElement('button');
+    removeButton.type = 'button';
+    removeButton.className = 'favorite-toggle is-active';
+    removeButton.title = 'Remove from favorites';
+    removeButton.setAttribute('aria-pressed', 'true');
+    removeButton.innerHTML = '&#9829;';
+    removeButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      removeFavoriteById(favorite.id);
+      renderFavoritesGallery(container);
+      images = Array.from(document.querySelectorAll('.photo-album img'));
+    });
+
+    card.appendChild(removeButton);
+    card.appendChild(image);
+    container.appendChild(card);
+  });
+}
+
+function buildFavoriteEntry(imageMeta) {
+  const albumTitle = document.querySelector('.header h1')?.textContent?.trim() || document.title;
+  const full = toAbsoluteUrl(imageMeta.full);
+  const thumb = toAbsoluteUrl(imageMeta.thumb || imageMeta.full);
+
+  return {
+    id: full,
+    full,
+    thumb,
+    alt: imageMeta.alt || 'Favorite image',
+    albumTitle,
+    sourcePage: window.location.pathname,
+    addedAt: Date.now(),
+  };
+}
+
+function toAbsoluteUrl(path) {
+  try {
+    return new URL(path, window.location.href).href;
+  } catch (_error) {
+    return path;
+  }
+}
+
+function getFavorites() {
+  let parsed;
+  try {
+    parsed = JSON.parse(localStorage.getItem(FAVORITES_STORAGE_KEY) || '[]');
+  } catch (_error) {
+    parsed = [];
+  }
+
+  if (!Array.isArray(parsed)) {
+    return [];
+  }
+
+  return parsed.filter((item) => item && typeof item.id === 'string' && typeof item.full === 'string');
+}
+
+function saveFavorites(favorites) {
+  localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites));
+}
+
+function isFavorite(id) {
+  return getFavorites().some((favorite) => favorite.id === id);
+}
+
+function toggleFavorite(entry) {
+  const favorites = getFavorites();
+  const index = favorites.findIndex((favorite) => favorite.id === entry.id);
+
+  if (index >= 0) {
+    favorites.splice(index, 1);
+  } else {
+    favorites.unshift(entry);
+  }
+
+  saveFavorites(favorites);
+}
+
+function removeFavoriteById(id) {
+  const favorites = getFavorites().filter((favorite) => favorite.id !== id);
+  saveFavorites(favorites);
+}
+
+function clearFavorites() {
+  saveFavorites([]);
 }
 
 function enlargeImage(imgElement) {
