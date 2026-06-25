@@ -97,6 +97,10 @@ body {
   animation: fade-up 0.72s ease-out both;
 }
 
+.nav-item {
+  position: relative;
+}
+
 .nav-link {
   display: inline-flex;
   align-items: center;
@@ -115,6 +119,48 @@ body {
   color: #fff;
   background: linear-gradient(135deg, var(--accent), var(--accent-deep));
   transform: translateY(-1px);
+}
+
+.nav-link-year {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-link-year::after {
+  content: '\25BE';
+  margin-left: 8px;
+  font-size: 0.7rem;
+}
+
+.nav-year-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  z-index: 10;
+  min-width: 150px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  background: rgba(255, 253, 249, 0.98);
+  border: 1px solid rgba(185, 108, 79, 0.14);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.nav-item-year:hover .nav-year-menu,
+.nav-item-year:focus-within .nav-year-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.nav-year-link {
+  width: 100%;
 }
 
 .photo-album {
@@ -227,6 +273,30 @@ body {
   .nav {
     padding: 10px;
     border-radius: 24px;
+  }
+
+  .nav-item-year {
+    width: 100%;
+  }
+
+  .nav-link-year {
+    width: 100%;
+  }
+
+  .nav-year-menu {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    min-width: 0;
+    padding: 6px 0 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
   }
 
   .photo-album {
