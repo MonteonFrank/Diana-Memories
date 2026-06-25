@@ -127,6 +127,11 @@ body {
   cursor: pointer;
 }
 
+.nav-link-year[aria-expanded='true'] {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+}
+
 .nav-link-year::after {
   content: '\25BE';
   margin-left: 8px;
@@ -174,6 +179,8 @@ body {
   border: 1px solid rgba(185, 108, 79, 0.08);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow);
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1200px;
 }
 
 .photo-album img {
@@ -271,32 +278,70 @@ body {
   }
 
   .nav {
-    padding: 10px;
-    border-radius: 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+    padding: 12px;
+    border-radius: 20px;
+    gap: 10px;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-link {
+    width: 100%;
+    min-height: 44px;
   }
 
   .nav-item-year {
     width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(185, 108, 79, 0.14);
+    border-radius: 14px;
+    background: rgba(255, 253, 249, 0.8);
   }
 
   .nav-link-year {
     width: 100%;
+    justify-content: space-between;
+    border-radius: 12px;
   }
 
   .nav-year-menu {
     position: static;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 6px;
     min-width: 0;
-    padding: 6px 0 0;
+    padding: 0;
+    margin-top: 8px;
     border: 0;
     border-radius: 0;
     box-shadow: none;
     background: transparent;
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    overflow: hidden;
+    transform: none;
+    transition: max-height 0.25s ease, opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .nav-item-year.is-open .nav-year-menu {
     opacity: 1;
     visibility: visible;
-    transform: none;
+    max-height: 480px;
+    padding: 6px 0 0;
+  }
+
+  .nav-year-link {
+    justify-content: flex-start;
+    border-radius: 10px;
+    background: rgba(255, 253, 249, 0.75);
+    border: 1px solid rgba(185, 108, 79, 0.12);
+    padding: 10px 12px;
   }
 
   .photo-album {
@@ -307,6 +352,15 @@ body {
 
   .lightbox-hint {
     display: none;
+  }
+}
+
+@media (hover: none) {
+  .photo-album img:hover,
+  .album-section:hover,
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    transform: none;
   }
 }
 

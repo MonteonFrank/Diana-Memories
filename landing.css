@@ -119,6 +119,8 @@ main {
 .album-section {
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   background: var(--surface);
   border: 1px solid rgba(185, 108, 79, 0.08);
   border-radius: var(--radius-lg);
@@ -202,6 +204,8 @@ main {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
+  margin-top: auto;
   gap: 8px;
   padding: 12px 20px;
   font-size: 0.95rem;
