@@ -170,7 +170,7 @@ function renderJsonGallery(photoAlbum, scriptId) {
 
   try {
     const parsedData = JSON.parse(dataElement.textContent);
-    galleryItems = Array.isArray(parsedData) ? parsedData : parsedData.images;
+    galleryItems = normalizeGalleryItems(parsedData);
   } catch (error) {
     console.error('Failed to parse gallery JSON.', error);
     return;
@@ -231,6 +231,53 @@ function renderJsonGallery(photoAlbum, scriptId) {
 
     photoAlbum.appendChild(mediaWrapper);
   });
+}
+
+function normalizeGalleryItems(parsedData) {
+  const galleryItems = Array.isArray(parsedData) ? parsedData : parsedData.images;
+
+  if (!Array.isArray(galleryItems)) {
+    return [];
+  }
+
+  const basePath = typeof parsedData?.basePath === 'string'
+    ? parsedData.basePath.replace(/\/$/, '')
+    : '';
+  const thumbsPath = typeof parsedData?.thumbsPath === 'string'
+    ? parsedData.thumbsPath.replace(/\/$/, '')
+    : (basePath ? `${basePath}/thumbs` : '');
+  const altPrefix = typeof parsedData?.altPrefix === 'string'
+    ? parsedData.altPrefix
+    : 'Gallery image';
+
+  return galleryItems
+    .map((item, index) => normalizeGalleryItem(item, index, basePath, thumbsPath, altPrefix))
+    .filter(Boolean);
+}
+
+function normalizeGalleryItem(item, index, basePath, thumbsPath, altPrefix) {
+  if (typeof item === 'string') {
+    return {
+      thumb: thumbsPath ? `${thumbsPath}/${item}` : item,
+      full: basePath ? `${basePath}/${item}` : item,
+      alt: `${altPrefix} ${index + 1}`,
+    };
+  }
+
+  if (!item || typeof item !== 'object') {
+    return null;
+  }
+
+  if (typeof item.file === 'string') {
+    return {
+      ...item,
+      thumb: item.thumb || (thumbsPath ? `${thumbsPath}/${item.file}` : item.file),
+      full: item.full || (basePath ? `${basePath}/${item.file}` : item.file),
+      alt: item.alt || `${altPrefix} ${index + 1}`,
+    };
+  }
+
+  return item;
 }
 
 function buildFavoriteButton(entry) {
