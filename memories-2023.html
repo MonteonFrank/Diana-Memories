@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memories 2023 Photo Album</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
@@ -16,44 +16,7 @@
     <p class="header-subtitle">A big collection of everyday photos from Diana's first year, gathered into one album.</p>
   </header>
 
-  <div>
-    <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">Main Page</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="favorites.html">Favorites</a>
-      </li>
-      <li class="nav-item nav-item-year">
-        <button class="nav-link nav-link-year" type="button" aria-haspopup="true">2023</button>
-        <ul class="nav-year-menu">
-          <li><a class="nav-link nav-year-link" href="new-born.html">New Born</a></li>
-          <li><a class="nav-link nav-year-link" href="christmas-album.html">Christmas 2023</a></li>
-          <li><a class="nav-link nav-year-link" href="memories-2023.html">Memories 2023</a></li>
-        </ul>
-      </li>
-      <li class="nav-item nav-item-year">
-        <button class="nav-link nav-link-year" type="button" aria-haspopup="true">2024</button>
-        <ul class="nav-year-menu">
-          <li><a class="nav-link nav-year-link" href="baptism.html">Baptism</a></li>
-          <li><a class="nav-link nav-year-link" href="birthday.html">1st Birthday</a></li>
-          <li><a class="nav-link nav-year-link" href="monthbymonth.html">Month by Month</a></li>
-          <li><a class="nav-link nav-year-link" href="sessioncousins.html">Session with Cousins</a></li>
-          <li><a class="nav-link nav-year-link" href="christmas2-album.html">Christmas 2024</a></li>
-        </ul>
-      </li>
-      <li class="nav-item nav-item-year">
-        <button class="nav-link nav-link-year" type="button" aria-haspopup="true">2025</button>
-        <ul class="nav-year-menu">
-          <li><a class="nav-link nav-year-link" href="beach-trip-2025.html">1st Beach Trip</a></li>
-          <li><a class="nav-link nav-year-link" href="two-years-old.html">2 years old!</a></li>
-          <li><a class="nav-link nav-year-link" href="second-birthday-2025.html">2nd Birthday Party</a></li>
-          <li><a class="nav-link nav-year-link" href="christmas-2025.html">Christmas 2025</a></li>
-          <li><a class="nav-link nav-year-link" href="happy-moments-2025.html">Happy Moments 2025</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+  <div id="site-nav"></div>
 
   <div class="photo-album" data-gallery-json="memories-2023-gallery-data"></div>
 
@@ -63,8 +26,8 @@
 
   <script id="memories-2023-gallery-data" type="application/json">
     {
-      "basePath": "./2023/Memories 2023",
-      "thumbsPath": "./2023/Memories 2023/thumbs",
+      "basePath": "./2023/memories-2023",
+      "thumbsPath": "./2023/memories-2023/thumbs",
       "altPrefix": "Memories 2023 Photo",
       "images": [
         "0016A9BE-7269-45B6-B976-4C068D577691_1_105_c.jpeg",
@@ -666,6 +629,6 @@
     }
   </script>
 
-  <script src="./scripts.js"></script>
+  <script src="./assets/js/scripts.js"></script>
 </body>
 </html>

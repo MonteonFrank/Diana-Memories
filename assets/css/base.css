@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+/* Shared design tokens used by both landing.css and style.css */
+:root {
+  --bg: #f8f4ee;
+  --surface-muted: #f2e9dd;
+  --text: #2e2a27;
+  --muted: #746b64;
+  --accent: #d9896a;
+  --accent-deep: #b96c4f;
+  --sage: #a8c6b0;
+  --highlight: #f1d39a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
