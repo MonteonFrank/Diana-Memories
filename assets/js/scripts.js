@@ -4,6 +4,7 @@ const preloadedImageUrls = new Set();
 const FAVORITES_STORAGE_KEY = 'dianaMemoriesFavoritesV1';
 
 document.addEventListener('DOMContentLoaded', () => {
+  buildNav();
   const photoAlbum = document.querySelector('.photo-album');
   const favoritesAlbum = document.getElementById('favorites-album');
   const clearFavoritesButton = document.getElementById('clear-favorites');
@@ -68,6 +69,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+function buildNav() {
+  const placeholder = document.getElementById('site-nav');
+  if (!placeholder) return;
+
+  placeholder.outerHTML = `<div>
+    <ul class="nav">
+      <li class="nav-item"><a class="nav-link" href="index.html">Main Page</a></li>
+      <li class="nav-item"><a class="nav-link" href="favorites.html">Favorites</a></li>
+      <li class="nav-item nav-item-year">
+        <button class="nav-link nav-link-year" type="button" aria-haspopup="true">2023</button>
+        <ul class="nav-year-menu">
+          <li><a class="nav-link nav-year-link" href="new-born.html">New Born</a></li>
+          <li><a class="nav-link nav-year-link" href="christmas-album.html">Christmas 2023</a></li>
+          <li><a class="nav-link nav-year-link" href="memories-2023.html">Memories 2023</a></li>
+        </ul>
+      </li>
+      <li class="nav-item nav-item-year">
+        <button class="nav-link nav-link-year" type="button" aria-haspopup="true">2024</button>
+        <ul class="nav-year-menu">
+          <li><a class="nav-link nav-year-link" href="baptism.html">Baptism</a></li>
+          <li><a class="nav-link nav-year-link" href="birthday.html">1st Birthday</a></li>
+          <li><a class="nav-link nav-year-link" href="monthbymonth.html">Month by Month</a></li>
+          <li><a class="nav-link nav-year-link" href="sessioncousins.html">Session with Cousins</a></li>
+          <li><a class="nav-link nav-year-link" href="christmas2-album.html">Christmas 2024</a></li>
+        </ul>
+      </li>
+      <li class="nav-item nav-item-year">
+        <button class="nav-link nav-link-year" type="button" aria-haspopup="true">2025</button>
+        <ul class="nav-year-menu">
+          <li><a class="nav-link nav-year-link" href="beach-trip-2025.html">1st Beach Trip</a></li>
+          <li><a class="nav-link nav-year-link" href="two-years-old.html">2 years old!</a></li>
+          <li><a class="nav-link nav-year-link" href="second-birthday-2025.html">2nd Birthday Party</a></li>
+          <li><a class="nav-link nav-year-link" href="christmas-2025.html">Christmas 2025</a></li>
+          <li><a class="nav-link nav-year-link" href="happy-moments-2025.html">Happy Moments 2025</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>`;
+}
 
 function setupMobileYearMenus() {
   const yearItems = Array.from(document.querySelectorAll('.nav-item-year'));

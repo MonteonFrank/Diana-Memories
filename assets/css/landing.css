@@ -1,24 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+@import './base.css';
 
 :root {
-  --bg: #f8f4ee;
   --surface: rgba(255, 253, 249, 0.88);
   --surface-strong: #fffdf9;
-  --surface-muted: #f2e9dd;
-  --text: #2e2a27;
-  --muted: #746b64;
-  --accent: #d9896a;
-  --accent-deep: #b96c4f;
-  --sage: #a8c6b0;
-  --highlight: #f1d39a;
   --shadow: 0 20px 45px rgba(72, 50, 37, 0.12);
   --shadow-hover: 0 28px 55px rgba(72, 50, 37, 0.18);
   --radius-lg: 28px;
   --radius-md: 20px;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 body {
@@ -32,18 +20,6 @@ body {
     linear-gradient(180deg, #fbf8f2 0%, var(--bg) 100%);
   display: flex;
   flex-direction: column;
-}
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(22px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .header {
