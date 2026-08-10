@@ -73,6 +73,93 @@ body {
   font-weight: 700;
 }
 
+.nav {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto 24px;
+  padding: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid rgba(185, 108, 79, 0.08);
+  border-radius: 999px;
+  box-shadow: var(--shadow-soft);
+  animation: fade-up 0.72s ease-out both;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 999px;
+  transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  transform: translateY(-1px);
+}
+
+.nav-link-year {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-link-year[aria-expanded='true'] {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+}
+
+.nav-link-year::after {
+  content: '\25BE';
+  margin-left: 8px;
+  font-size: 0.7rem;
+}
+
+.nav-year-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  z-index: 10;
+  min-width: 150px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  background: rgba(255, 253, 249, 0.98);
+  border: 1px solid rgba(185, 108, 79, 0.14);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.nav-item-year:hover .nav-year-menu,
+.nav-item-year:focus-within .nav-year-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.nav-year-link {
+  width: 100%;
+}
+
 main {
   width: min(1100px, calc(100% - 32px));
   margin: 0 auto;
@@ -128,7 +215,101 @@ main {
   font-size: 0.96rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .nav {
+    width: min(100% - 20px, 1200px);
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+    padding: 12px;
+    border-radius: 20px;
+    gap: 10px;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-link {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .nav-item-year {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(185, 108, 79, 0.14);
+    border-radius: 14px;
+    background: rgba(255, 253, 249, 0.8);
+  }
+
+  .nav-link-year {
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 12px;
+  }
+
+  .nav-year-menu {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    min-width: 0;
+    padding: 0;
+    margin-top: 8px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    overflow: hidden;
+    transform: none;
+    transition: max-height 0.25s ease, opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .nav-item-year.is-open .nav-year-menu {
+    opacity: 1;
+    visibility: visible;
+    max-height: 480px;
+    padding: 6px 0 0;
+  }
+
+  .nav-year-link {
+    justify-content: flex-start;
+    color: var(--text);
+    border-radius: 10px;
+    background: rgba(255, 253, 249, 0.75);
+    border: 1px solid rgba(185, 108, 79, 0.12);
+    padding: 10px 12px;
+  }
+
+  .nav-item-year:hover .nav-year-menu,
+  .nav-item-year:focus-within .nav-year-menu {
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    padding: 0;
+    transform: none;
+  }
+
+  .nav-item-year.is-open:hover .nav-year-menu,
+  .nav-item-year.is-open:focus-within .nav-year-menu {
+    opacity: 1;
+    visibility: visible;
+    max-height: 480px;
+    padding: 6px 0 0;
+    transform: none;
+  }
+
+  .nav-year-link:hover,
+  .nav-year-link:focus-visible {
+    color: var(--text);
+    background: rgba(241, 211, 154, 0.45);
+    transform: none;
+  }
+
   .header {
     padding: 34px 20px;
   }
