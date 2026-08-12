@@ -79,6 +79,7 @@ function buildNav() {
       <li class="nav-item"><a class="nav-link" href="index.html">Main Page</a></li>
       <li class="nav-item"><a class="nav-link" href="favorites.html">Favorites</a></li>
       <li class="nav-item"><a class="nav-link" href="letters-to-diana.html">Letters to Diana</a></li>
+      <li class="nav-item"><a class="nav-link" href="video-memories.html">Videos</a></li>
       <li class="nav-item nav-item-year">
         <button class="nav-link nav-link-year" type="button" aria-haspopup="true">2023</button>
         <ul class="nav-year-menu">
