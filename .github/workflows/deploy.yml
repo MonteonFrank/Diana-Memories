@@ -16,25 +16,50 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepare deployment artifact
+        run: |
+          rm -rf dist
+          mkdir -p dist
+
+          cp ./*.html dist/
+          rsync -a ./assets/ dist/assets/
+          rsync -a ./2023/ dist/2023/
+          rsync -a ./2024/ dist/2024/
+          rsync -a ./2025/ dist/2025/
+
+      - name: Verify artifact size
+        run: |
+          size_kb=$(du -sk dist | cut -f1)
+          max_kb=$((950 * 1024))
+
+          echo "Artifact size: ${size_kb} KB"
+
+          if [ "$size_kb" -gt "$max_kb" ]; then
+            echo "Deployment artifact is too large. Expected under 950 MB, got ${size_kb} KB."
+            exit 1
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./dist
+
   deploy:
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # This assumes your index.html is in the root directory.
-          # If you use a framework like React/Vue/Vite, change this to './dist'
-          path: '.' 
-          
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
