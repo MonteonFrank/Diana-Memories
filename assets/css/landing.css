@@ -97,6 +97,7 @@ body {
   border-radius: 999px;
   box-shadow: 0 14px 28px rgba(72, 50, 37, 0.08);
   animation: fade-up 0.72s ease-out both;
+  z-index: 100;
 }
 
 .nav-item {
@@ -168,6 +169,10 @@ body {
 
 .nav-year-link {
   width: 100%;
+}
+
+.nav-year-link:visited {
+  color: var(--text);
 }
 
 main {

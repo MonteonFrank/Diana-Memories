@@ -71,6 +71,8 @@ body {
   border-radius: 999px;
   box-shadow: var(--shadow-soft);
   animation: fade-up 0.72s ease-out both;
+  /* z-index keeps the dropdown above page content sharing the same stacking context */
+  z-index: 100;
 }
 
 .nav-item {
@@ -142,6 +144,10 @@ body {
 
 .nav-year-link {
   width: 100%;
+}
+
+.nav-year-link:visited {
+  color: var(--text);
 }
 
 .photo-album {

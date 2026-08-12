@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Deploy CSS fixes to production",
+			"type": "shell",
+			"command": "cd /Users/frankmonteon/Documents/GitHub/Diana-Memories && git add assets/css/style.css assets/css/landing.css && git commit -m 'Fix dropdown overflow and visited link colors in navigation' && git push origin main",
+			"isBackground": false,
+			"group": "build"
+		}
+	]
+}
