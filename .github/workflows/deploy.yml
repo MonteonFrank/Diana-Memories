@@ -45,6 +45,7 @@ jobs:
           js_files = [root / 'assets/js/scripts.js']
 
           refs = set()
+          gallery_full_refs = set()
           for path in html_files + js_files:
             text = path.read_text(encoding='utf-8')
             refs.update(re.findall(r'"(\./[^"?#]+)"', text))
@@ -68,7 +69,9 @@ jobs:
             for item in images:
               if isinstance(item, str):
                 if base_path:
-                  refs.add(f'{base_path}/{item}')
+                  full_ref = f'{base_path}/{item}'
+                  refs.add(full_ref)
+                  gallery_full_refs.add(full_ref)
                 if thumbs_path:
                   refs.add(f'{thumbs_path}/{item}')
                 continue
@@ -80,6 +83,7 @@ jobs:
                 refs.add(item['thumb'])
               if isinstance(item.get('full'), str):
                 refs.add(item['full'])
+                gallery_full_refs.add(item['full'])
               if isinstance(item.get('src'), str):
                 refs.add(item['src'])
               if isinstance(item.get('thumbWebp'), str):
@@ -88,7 +92,9 @@ jobs:
               file_name = item.get('file')
               if isinstance(file_name, str):
                 if base_path:
-                  refs.add(f'{base_path}/{file_name}')
+                  full_ref = f'{base_path}/{file_name}'
+                  refs.add(full_ref)
+                  gallery_full_refs.add(full_ref)
                 if thumbs_path:
                   refs.add(f'{thumbs_path}/{file_name}')
 
@@ -119,7 +125,7 @@ jobs:
             if not src.is_file():
               continue
 
-            if rel.parts and rel.parts[0] in media_roots and 'thumbs' not in rel.parts:
+            if ref in gallery_full_refs and rel.parts and rel.parts[0] in media_roots and 'thumbs' not in rel.parts:
               thumb_src = src.parent / 'thumbs' / src.name
               if thumb_src.is_file():
                 copy_file(thumb_src, dist / rel)
