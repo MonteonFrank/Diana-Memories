@@ -34,6 +34,7 @@ jobs:
           rsync -a ./assets/ dist/assets/
 
           python3 - <<'PY'
+          import json
           import re
           import shutil
           from pathlib import Path
@@ -48,6 +49,60 @@ jobs:
             text = path.read_text(encoding='utf-8')
             refs.update(re.findall(r'"(\./[^"?#]+)"', text))
             refs.update(re.findall(r"'(\./[^'?#]+)'", text))
+
+          def add_gallery_refs(parsed):
+            images = parsed if isinstance(parsed, list) else parsed.get('images')
+            if not isinstance(images, list):
+              return
+
+            base_path = parsed.get('basePath', '') if isinstance(parsed, dict) else ''
+            thumbs_path = parsed.get('thumbsPath', '') if isinstance(parsed, dict) else ''
+
+            if base_path:
+              base_path = base_path.rstrip('/')
+            if thumbs_path:
+              thumbs_path = thumbs_path.rstrip('/')
+            elif base_path:
+              thumbs_path = f'{base_path}/thumbs'
+
+            for item in images:
+              if isinstance(item, str):
+                if base_path:
+                  refs.add(f'{base_path}/{item}')
+                if thumbs_path:
+                  refs.add(f'{thumbs_path}/{item}')
+                continue
+
+              if not isinstance(item, dict):
+                continue
+
+              if isinstance(item.get('thumb'), str):
+                refs.add(item['thumb'])
+              if isinstance(item.get('full'), str):
+                refs.add(item['full'])
+              if isinstance(item.get('src'), str):
+                refs.add(item['src'])
+              if isinstance(item.get('thumbWebp'), str):
+                refs.add(item['thumbWebp'])
+
+              file_name = item.get('file')
+              if isinstance(file_name, str):
+                if base_path:
+                  refs.add(f'{base_path}/{file_name}')
+                if thumbs_path:
+                  refs.add(f'{thumbs_path}/{file_name}')
+
+          for path in html_files:
+            text = path.read_text(encoding='utf-8')
+            for match in re.finditer(r'<script[^>]*type="application/json"[^>]*>(.*?)</script>', text, re.S):
+              payload = match.group(1).strip()
+              if not payload:
+                continue
+              try:
+                parsed = json.loads(payload)
+              except json.JSONDecodeError:
+                continue
+              add_gallery_refs(parsed)
 
           media_roots = {'2023', '2024', '2025'}
 
