@@ -32,9 +32,46 @@ jobs:
 
           cp ./*.html dist/
           rsync -a ./assets/ dist/assets/
-          rsync -a ./2023/ dist/2023/
-          rsync -a ./2024/ dist/2024/
-          rsync -a ./2025/ dist/2025/
+
+          python3 - <<'PY'
+          import re
+          import shutil
+          from pathlib import Path
+
+          root = Path('.')
+          dist = root / 'dist'
+          html_files = list(root.glob('*.html'))
+          js_files = [root / 'assets/js/scripts.js']
+
+          refs = set()
+          for path in html_files + js_files:
+            text = path.read_text(encoding='utf-8')
+            refs.update(re.findall(r'"(\./[^"?#]+)"', text))
+            refs.update(re.findall(r"'(\./[^'?#]+)'", text))
+
+          media_roots = {'2023', '2024', '2025'}
+
+          def copy_file(src: Path, dest: Path) -> None:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dest)
+
+          for ref in sorted(refs):
+            if not ref.startswith('./'):
+              continue
+
+            rel = Path(ref[2:])
+            src = root / rel
+            if not src.is_file():
+              continue
+
+            if rel.parts and rel.parts[0] in media_roots and 'thumbs' not in rel.parts:
+              thumb_src = src.parent / 'thumbs' / src.name
+              if thumb_src.is_file():
+                copy_file(thumb_src, dist / rel)
+                continue
+
+            copy_file(src, dist / rel)
+          PY
 
       - name: Verify artifact size
         run: |
